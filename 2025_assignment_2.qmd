@@ -178,12 +178,14 @@ head(ratings)
 Before looking closer at ratings, it is useful to add some information from the `data.movies` data frame. Do a left join, overwriting the `ratings` data frame, where the left hand side is `ratings`, the right and side is `data.movies[c("movieId", "title", "main.genre")]` and the merge key is `movieId`. Print the first 6 rows. **(2pts)**
 
 ```{r}
-# ratings =
-  # left_join(
-    # ?,
-    # ?,
-    # ?
-  # )
+ratings = left_join(
+  ratings,
+  data.movies[c("movieId", "title", "main.genre")],
+  by = "movieId"
+)
+
+head(ratings)
+
 ```
 
 
@@ -192,9 +194,36 @@ Before looking closer at ratings, it is useful to add some information from the 
 What are the names of the highest and lowest rated movie? **(1pt)**
 
 
+```{r}
+
+# Highest rated movie
+highest = ratings %>%
+  arrange(desc(avg.rating)) %>%
+  slice(1)
+
+cat("Highest rated movie: \n\n")
+
+
+# Lowest rated movie
+lowest = ratings %>%
+  arrange(avg.rating) %>%
+  slice(1)
+
+cat("Lowest rated movie:")
+print(lowest %>% select(title, avg.rating))
+```
+
+
 ## Question 13
 
 The variable `sd.rating` can be seen as a measure of how dispersed the viewer's opinion of a movie is. Which movie has the least dispersion in ratings? Hint: if you did the steps correctly, you should find a movie where the plot centers around the famous "Watergate scandal". **(1pt)**
+
+```{r}
+ratings %>%
+  arrange(sd.rating) %>%
+  slice(1) %>%
+  select(title, sd.rating)
+```
 
 
 ## Question 14
@@ -202,6 +231,18 @@ The variable `sd.rating` can be seen as a measure of how dispersed the viewer's 
 "Totoro", "Princess Mononoke", and "Spirited Away" are famous movies by the Japanese animator Hayao Miyazaki. What is the average rating for these 3 movies? **(2pts)**
 
 Hint: the function `grep(pattern, x)` returns indicies in the vector `x` that matches the strings in `pattern`. With the pattern `"Totoro|Mononoke|Spirited"` and `x` `"ratings$title"` you could search for the indices for these 3 movies.
+
+```{r}
+# Find indices of the 3 movies
+miyazaki_index = grep("Totoro|Mononoke|Spirited", ratings$title)
+
+# Check which titles matched
+ratings$title[miyazaki_index]
+
+# Calculate their average rating
+mean(ratings$avg.rating[miyazaki_index])
+```
+
 
 
 ## Question 15
@@ -213,6 +254,11 @@ The current `data.ratings` data contains ratings by 610 users for 1 051 movies. 
 The idea is that this matrix can be used for clustering: each user (row) is described by a high-dimensional vector, their 1051-dimensional vectors of ratings. The idea is that users that are "similar" in this vector space, may also share similar movie taste.
 
 We start by transforming our data into said format, we do this using `pivot_wider`. Complete the skeleton below where we create a new data frame `ratings.wide` that follows the above format. **(2pts)**
+
+```{r}
+dim(ratings)
+```
+
 
 ```{r}
 # ratings.wide = data.ratings %>%
