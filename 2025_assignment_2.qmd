@@ -261,13 +261,16 @@ dim(ratings)
 
 
 ```{r}
-# ratings.wide = data.ratings %>%
-#   select(userId, movieId, rating) %>%
-#   pivot_wider(
-#     names_from = should be a movie identifier,
-#     values_from = should be a rating number,
-#     values_fill = list(rating = 0)
-# )
+ratings.wide = data.ratings %>%
+  select(userId, movieId, rating) %>%
+  pivot_wider(
+    names_from = movieId,
+    values_from = rating,
+    values_fill = list(rating = 0)
+  )
+
+dim(ratings.wide)
+
 ```
 
 
@@ -277,11 +280,9 @@ Your research lead suggest trying out K-means with 5 centers. Run the `kmeans` c
 
 ```{r}
 set.seed(123) # NOTE: don't remove this.
-
-# X = ?
-# res = kmeans(X , centers = ?)
+X = as.matrix(ratings.wide[, -1])  # remove userId column
+res = kmeans(X, centers = 5)
 ```
-
 
 ## Question 17
 
@@ -294,15 +295,16 @@ To assess this strategy, your team lead suggest that you show her what the highe
 Start by adding a column called `cluster` to the `data.ratings` data set. **(2pts)**
 
 ```{r}
-# Create a data frame with cluser and userId info
-# cluster.data = tibble(userId = ratings.wide$userId, cluster = res$cluster)
+# Create a data frame mapping userId to cluster number
+cluster.data = tibble(userId = ratings.wide$userId, cluster = res$cluster)
 
-# Merge this with data.ratings
-# data.ratings = left_join(
-#   data.ratings,
-#   cluster.data,
-#   by = ?
-# )
+# Merge this with data.ratings based on userId
+data.ratings = left_join(
+  data.ratings,
+  cluster.data,
+  by = "userId"
+)
+
 ```
 
 
@@ -311,9 +313,16 @@ Start by adding a column called `cluster` to the `data.ratings` data set. **(2pt
 Show the name of the top-3 rated movies for each cluster 1 to 5. HINT: You should see "My Fair Lady (1964)" somewhere in cluster 3's top, and "Intouchables (2011)" somewhere in cluster 5's top. **(6pts)**
 
 ```{r}
-# data.ratings %>%
-  # group_by(?, ?) %>%
-  # ...
+top_movies_by_cluster = data.ratings %>%
+  group_by(cluster, movieId) %>%
+  summarise(avg.rating = mean(rating), .groups = "drop") %>%
+  left_join(data.movies[, c("movieId", "title")], by = "movieId") %>%
+  arrange(cluster, desc(avg.rating)) %>%
+  group_by(cluster) %>%
+  slice_head(n = 3)
+
+top_movies_by_cluster
+
 ```
 
 
