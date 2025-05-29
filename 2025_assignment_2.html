@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Your name">
+
+<title>ETC1010-5510: Introduction to Data Analysis Assignment 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="2025_assignment_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="2025_assignment_2_files/libs/quarto-html/quarto.js"></script>
+<script src="2025_assignment_2_files/libs/quarto-html/popper.min.js"></script>
+<script src="2025_assignment_2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="2025_assignment_2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="2025_assignment_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="2025_assignment_2_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="2025_assignment_2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="2025_assignment_2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="2025_assignment_2_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ETC1010-5510: Introduction to Data Analysis Assignment 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your name </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="instructions-to-students" class="level2">
+<h2 class="anchored" data-anchor-id="instructions-to-students">Instructions to Students</h2>
+<p><strong>This is an individual assignment and you must work on it on your own. Collaboration on the assignment constitute collusion. For more on collusion and misconduct please see this <a href="https://connect.monash.edu/s/article/FAQ-2144">webpage.</a> </strong></p>
+<p>You have just joined a <strong>movie streaming startup</strong> as a data scientist. The company plans to offer a curated selection of movies available for streaming on TVs/laptops/iPads etc.</p>
+<p>One of the company’s core technologies is its movie recommendation system. Your team lead, a research scientist with a PhD in recommendation systems, needs your help to do some exploratory research and analysis. Your team lead has suggested you start by looking at movie ratings data from <a href="http://movielens.org">MovieLens</a> in order to familiarize yourself with this type of data and to conduct some basic research. <em>MovieLens</em> is a publicly available dataset for research use. Attached to this assignment you’ll find a <em>small</em> version of the dataset from http://grouplens.org/datasets that contains around 100 000 ratings for ca 10 000 movies.</p>
+<p>This assignment is structured as a gradual walkthrough of the kind of analysis you could perform on this type of data set, we’ll guide you through step-by-step but with you doing the actual work.</p>
+<p>Please make sure you read the hints throughout the assignment to help guide you on the tasks.</p>
+<p>The points allocated for each of the elements in the assignment are marked in the questions and in certain cases, code scaffolding has been provided. However, if you feel this scaffolding is unhelpful, you are not obliged to use it.</p>
+</section>
+<section id="general-coding-debugging-hints" class="level2">
+<h2 class="anchored" data-anchor-id="general-coding-debugging-hints">General coding / debugging hints</h2>
+<ul>
+<li><p>If you experience errors when rendering, it is often good to step through the document one chunk at a time, starting at the very beginning.</p></li>
+<li><p>Save and re-render often. Writing a lot of code before executing anything will often lead to headaches (e.g., write one simple command as part of your answer, re-run everything, rinse-and-repeat.)</p></li>
+</ul>
+</section>
+<section id="marking-grades" class="level2">
+<h2 class="anchored" data-anchor-id="marking-grades">Marking + Grades</h2>
+<p>This assignment will be worth <strong>15%</strong> of your total grade.</p>
+<p>For this assignment, you will need to upload the following into Moodle:</p>
+<ul>
+<li><p>The rendered html file <strong>saved as a pdf</strong>. The assignment will be only marked if the pdf is uploaded in Moodle. <strong>The submitted assignment pdf file must have all the code and output visible.</strong></p></li>
+<li><p>To complete the assignment, you will need to fill in the blanks with appropriate R code for some questions. These sections are marked with <code>___</code>. For other questions, you will need to write the entire R code chunk.</p></li>
+<li><p><strong>At a minimum, your assignment should be able to be “knitted”</strong> using the <code>Knit</code> button for your Rmarkdown document so that you can produce a html file that you will save as pdf file and upload it into Moodle.</p></li>
+</ul>
+<p>If you want to look at what the assignment looks like as you progress , remember that you can set the R chunk options to <code>eval = FALSE</code> like so to ensure that you can knit the file:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>``<span class="in">`{r this-chunk-will-not-run, eval = FALSE} `</span>r''`</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a &lt;- 1 + 2</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>If you use <code>eval = FALSE</code> or <code>echo = FALSE</code>, please remember to ensure that you have set to <code>eval = TRUE</code> and <code>echo = TRUE</code> when you submit the assignment, to ensure all your R codes run.</strong></p>
+<p><strong>IMPORTANT: You must use R code to answer all the questions in the report.</strong></p>
+</section>
+<section id="due-date" class="level2">
+<h2 class="anchored" data-anchor-id="due-date">Due Date</h2>
+<p>This assignment is due on Friday, 30 May 2025, 11:55 PM. You will submit the knitted html file <strong>saved as a pdf</strong> via Moodle. Please make sure you add your name on the YAML part of the Rmd file before you knit it and save it as pdf.</p>
+</section>
+<section id="how-to-find-help-from-r-functions" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-find-help-from-r-functions">How to find help from R functions?</h2>
+<p>Remember, you can look up the help file for functions by typing: <code>?function_name</code>. For example, <code>?mean</code>.</p>
+</section>
+<section id="load-all-the-libraries-that-you-need-here" class="level2">
+<h2 class="anchored" data-anchor-id="load-all-the-libraries-that-you-need-here">Load all the libraries that you need here</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="read-in-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-the-data">Read in the data</h2>
+<p>The Movielens data consists of 2 csv files, let’s start by reading them into R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.movies <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"movies.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data.ratings <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"ratings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The file <code>data.movies</code> contains 3 variables with information about every movie:</p>
+<ul>
+<li><code>movieId</code>: a positive consecutive integer 1, 2, …, that uniquely identifies the movie.</li>
+<li><code>title</code>: a text string with the name of the movie as well as year in parenthesis.</li>
+<li><code>genres</code>: a text string with the movie genre(s), multiple genres are separated with the pipe <code>|</code> symbol.</li>
+</ul>
+<p>The first few rows of this dataset looks like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data.movies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  movieId title                              genres                             
+    &lt;dbl&gt; &lt;chr&gt;                              &lt;chr&gt;                              
+1       1 Toy Story (1995)                   Adventure|Animation|Children|Comed…
+2       2 Jumanji (1995)                     Adventure|Children|Fantasy         
+3       3 Grumpier Old Men (1995)            Comedy|Romance                     
+4       4 Waiting to Exhale (1995)           Comedy|Drama|Romance               
+5       5 Father of the Bride Part II (1995) Comedy                             
+6       6 Heat (1995)                        Action|Crime|Thriller              </code></pre>
+</div>
+</div>
+<p>The file <code>data.ratings</code> contains 3 variables that record what rating a user gave for a particular movie:</p>
+<ul>
+<li><code>userId</code>: a positive consecutive integer that uniquely identifies the user.</li>
+<li><code>movieId</code>: a positive consecutive integer that uniquely identifies the movie.</li>
+<li><code>rating</code>: A numeric value that ranges between 0.5 to 5 recording the rating.</li>
+</ul>
+<p>In this data set, the pair (<code>userId</code>, <code>movieId</code>) uniquely identifies the rating the user with a given id gave to a specific movie.</p>
+<p>The first few rows of this dataset looks like :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data.ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  userId movieId rating
+   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1      1       1      4
+2      1       3      4
+3      1       6      4
+4      1      47      5
+5      1      50      5
+6      1      70      3</code></pre>
+</div>
+</div>
+</section>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<p>How many movies are there in the <code>data.movies</code> data set? <strong>(1pt)</strong>.</p>
+</section>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<p>How many unique movies are there in the <code>data.ratings</code> file? <strong>(1pt)</strong>. (HINT: look at number of unique values of <code>movieId</code>).</p>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<p>Based on the two previous answers, we can infer that the file <code>data.ratings</code> does not record ratings for every single movie in <code>data.movies</code>. How many movies listed in <code>data.movies</code> does not have a rating recorded? <strong>(1pt)</strong></p>
+</section>
+<section id="question-4" class="level2">
+<h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
+<p>The variable <code>genres</code> in <code>data.movies</code> contains information on many genres. Let’s simplify things and choose the first entry in this string as the “main” genre.</p>
+<p>Use the <code>separate</code> command to create a new column in <code>data.movies</code> called <code>main.genre</code>, and print the first rows of this data frame using <code>head()</code>. Hint: you can set the <code>sep</code> argument to <code>separate</code> to <code>"\\|"</code> and the <code>extra</code> argument to <code>"drop"</code>. <strong>(1pt)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.movies =</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># data.movies %&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># separate(genres, into =..., sep = ..., extra = "drop")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-5" class="level2">
+<h2 class="anchored" data-anchor-id="question-5">Question 5</h2>
+<p>What are the most 3 most common main genres in the <code>data.movies</code> dataset? <strong>(1pt)</strong></p>
+</section>
+<section id="question-6" class="level2">
+<h2 class="anchored" data-anchor-id="question-6">Question 6</h2>
+<p>In the variable <code>title</code> it seems like the year is placed at the end in parenthesis, let’s try to find what year the oldest movie was made. We can use the <code>str_extract</code> function to pick out the “(YYYY)” part of the title, then <code>str_replace_all</code> to remove the parenthesis, then convert to integers. (Note: if some titles don’t follow the “(1991)” format at the end, we’ll see <code>NA</code> values in some entries, we can ignore these here). What year was the oldest movie made? <strong>(2pts)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>year.parens <span class="ot">=</span> <span class="fu">str_extract</span>(data.movies<span class="sc">$</span>title, <span class="st">"</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">)"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>year <span class="ot">=</span> <span class="fu">as.integer</span>(<span class="fu">str_replace_all</span>(year.parens, <span class="st">"[()]"</span>, <span class="st">""</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ... what is the earliest year?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-7" class="level2">
+<h2 class="anchored" data-anchor-id="question-7">Question 7</h2>
+<p>Using the answer above, what is the name and main genre of the oldest movie(s)? <strong>(2pts)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the row number in data.movies (replace 1908 with the year you found above)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>year.index <span class="ot">=</span> <span class="fu">which</span>(year <span class="sc">==</span> <span class="dv">1908</span>) </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, pick out this row number in the data.movies data frame...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-8" class="level2">
+<h2 class="anchored" data-anchor-id="question-8">Question 8</h2>
+<p>Your team lead is interested in average ratings. Before proceeding, she recommends that you restrict your data set to movies that have been rated by at least 25 users. Filter the <code>data.ratings</code> data frame to contain only movies that have been rated by at least (&gt;=) 25 users. <strong>(2pts)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is some suggested code:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings = data.ratings %&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group_by(?) %&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mutate(num.ratings = ?) %&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(num.ratings &gt;= 25)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-9" class="level2">
+<h2 class="anchored" data-anchor-id="question-9">Question 9</h2>
+<p>How many unique movies are left in the ratings data set now? <strong>(1pt)</strong></p>
+</section>
+<section id="question-10" class="level2">
+<h2 class="anchored" data-anchor-id="question-10">Question 10</h2>
+<p>Create a new data frame called <code>ratings</code> that have columns: <code>movieId</code>: the id of the movie, <code>avg.rating</code>: the average <code>rating</code>, <code>sd.rating</code>: the standard deviation of <code>rating</code>. Print the first 6 rows of this data. <strong>(2pts)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ratings = data.ratings %&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group_by(?) %&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># summarise(?, ?)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-11" class="level2">
+<h2 class="anchored" data-anchor-id="question-11">Question 11</h2>
+<p>Before looking closer at ratings, it is useful to add some information from the <code>data.movies</code> data frame. Do a left join, overwriting the <code>ratings</code> data frame, where the left hand side is <code>ratings</code>, the right and side is <code>data.movies[c("movieId", "title", "main.genre")]</code> and the merge key is <code>movieId</code>. Print the first 6 rows. <strong>(2pts)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ratings =</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># left_join(</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ?,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ?,</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ?</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-12" class="level2">
+<h2 class="anchored" data-anchor-id="question-12">Question 12</h2>
+<p>What are the names of the highest and lowest rated movie? <strong>(1pt)</strong></p>
+</section>
+<section id="question-13" class="level2">
+<h2 class="anchored" data-anchor-id="question-13">Question 13</h2>
+<p>The variable <code>sd.rating</code> can be seen as a measure of how dispersed the viewer’s opinion of a movie is. Which movie has the least dispersion in ratings? Hint: if you did the steps correctly, you should find a movie where the plot centers around the famous “Watergate scandal”. <strong>(1pt)</strong></p>
+</section>
+<section id="question-14" class="level2">
+<h2 class="anchored" data-anchor-id="question-14">Question 14</h2>
+<p>“Totoro”, “Princess Mononoke”, and “Spirited Away” are famous movies by the Japanese animator Hayao Miyazaki. What is the average rating for these 3 movies? <strong>(2pts)</strong></p>
+<p>Hint: the function <code>grep(pattern, x)</code> returns indicies in the vector <code>x</code> that matches the strings in <code>pattern</code>. With the pattern <code>"Totoro|Mononoke|Spirited"</code> and <code>x</code> <code>"ratings$title"</code> you could search for the indices for these 3 movies.</p>
+</section>
+<section id="question-15" class="level2">
+<h2 class="anchored" data-anchor-id="question-15">Question 15</h2>
+<p>Your team lead is interesting in using this data to build movie recommendations. You told her about the K-means clustering algorithm, and she suggests a way you could try it out on the ratings dataset.</p>
+<p>The current <code>data.ratings</code> data contains ratings by 610 users for 1 051 movies. We can represent this data as a 610 x 1051 dimensional matrix where entry (i, j) contains user i’s <code>rating</code> for the j’th movie. If a user hasn’t rated a movie, we can set the entry to 0.</p>
+<p>The idea is that this matrix can be used for clustering: each user (row) is described by a high-dimensional vector, their 1051-dimensional vectors of ratings. The idea is that users that are “similar” in this vector space, may also share similar movie taste.</p>
+<p>We start by transforming our data into said format, we do this using <code>pivot_wider</code>. Complete the skeleton below where we create a new data frame <code>ratings.wide</code> that follows the above format. <strong>(2pts)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ratings.wide = data.ratings %&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(userId, movieId, rating) %&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_wider(</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     names_from = should be a movie identifier,</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     values_from = should be a rating number,</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     values_fill = list(rating = 0)</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-16" class="level2">
+<h2 class="anchored" data-anchor-id="question-16">Question 16</h2>
+<p>Your research lead suggest trying out K-means with 5 centers. Run the <code>kmeans</code> command on <code>X</code> where <code>X = as.matrix(ratings.wide[, -1])</code>. <strong>(1pt)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># </span><span class="al">NOTE</span><span class="co">: don't remove this.</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># X = ?</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># res = kmeans(X , centers = ?)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-17" class="level2">
+<h2 class="anchored" data-anchor-id="question-17">Question 17</h2>
+<p>The <code>res$cluster</code> output from the above result tells us which cluster a user (id 1 to 610) belongs to. For example, if you ran the above code correctly, the user with id 496 belongs to cluster number 2.</p>
+<p>Your team lead says we can try to use these clusters for movie recommendations: instead of recommending movies that are ranked high, we recommend movies that are ranked high, <em>but</em> conditional on cluster. Particularly, for all clusters 1 to 5, we can calculate average ratings for all the movies. Then, based on which cluster a user belongs to, we will recommend them highly ranked movies in that cluster that they have previously not seen.</p>
+<p>To assess this strategy, your team lead suggest that you show her what the highest ranked movies in each cluster are.</p>
+<p>Start by adding a column called <code>cluster</code> to the <code>data.ratings</code> data set. <strong>(2pts)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with cluser and userId info</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cluster.data = tibble(userId = ratings.wide$userId, cluster = res$cluster)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge this with data.ratings</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings = left_join(</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   data.ratings,</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   cluster.data,</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   by = ?</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-18" class="level2">
+<h2 class="anchored" data-anchor-id="question-18">Question 18</h2>
+<p>Show the name of the top-3 rated movies for each cluster 1 to 5. HINT: You should see “My Fair Lady (1964)” somewhere in cluster 3’s top, and “Intouchables (2011)” somewhere in cluster 5’s top. <strong>(6pts)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings %&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group_by(?, ?) %&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-19" class="level2">
+<h2 class="anchored" data-anchor-id="question-19">Question 19</h2>
+<p>In this question, you are essentially building your very own “simple” movie recommendation system. For the user with id 414, recommend the top 5 movies according to the average rating in their cluster. <strong>(8pts)</strong></p>
+<p>HINT: To answer this, you need to:</p>
+<ul>
+<li><p>Find which cluster user 414 belongs to</p></li>
+<li><p>Calculate average movie ratings by cluster</p></li>
+<li><p>Find out which movies this user have already watched</p></li>
+<li><p>Recommend the 5 highest rated movies in the cluster the user belongs to that the user have not already watched</p></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
