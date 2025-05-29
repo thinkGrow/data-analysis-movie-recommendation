@@ -322,7 +322,6 @@ top_movies_by_cluster = data.ratings %>%
   slice_head(n = 3)
 
 top_movies_by_cluster
-
 ```
 
 
@@ -338,5 +337,37 @@ HINT: To answer this, you need to:
 - Find out which movies this user have already watched
 
 - Recommend the 5 highest rated movies in the cluster the user belongs to that the user have not already watched
+
+
+```{r}
+# Step 1: Get the cluster number (make sure it's a single value!)
+user_cluster = data.ratings %>%
+  filter(userId == 414) %>%
+  pull(cluster) %>%
+  unique()
+
+# Optional: check it's length 1
+length(user_cluster)
+
+# Step 2: Find movies the user has already rated
+watched_movies = data.ratings %>%
+  filter(userId == 414) %>%
+  pull(movieId)
+
+# Step 3: Average ratings of movies in that user's cluster
+cluster_avg = data.ratings %>%
+  filter(cluster == user_cluster) %>%
+  group_by(movieId) %>%
+  summarise(avg.rating = mean(rating), .groups = "drop")
+
+# Step 4: Recommend top 5 unseen movies
+recommendations = cluster_avg %>%
+  filter(!movieId %in% watched_movies) %>%
+  left_join(data.movies[, c("movieId", "title")], by = "movieId") %>%
+  arrange(desc(avg.rating)) %>%
+  slice_head(n = 5)
+
+recommendations
+```
 
 
