@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Your name">
+<meta name="author" content="MT">
 
 <title>ETC1010-5510: Introduction to Data Analysis Assignment 2</title>
 <style>
@@ -90,7 +90,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Your name </p>
+             <p>MT </p>
           </div>
   </div>
     
@@ -103,58 +103,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="instructions-to-students" class="level2">
-<h2 class="anchored" data-anchor-id="instructions-to-students">Instructions to Students</h2>
-<p><strong>This is an individual assignment and you must work on it on your own. Collaboration on the assignment constitute collusion. For more on collusion and misconduct please see this <a href="https://connect.monash.edu/s/article/FAQ-2144">webpage.</a> </strong></p>
-<p>You have just joined a <strong>movie streaming startup</strong> as a data scientist. The company plans to offer a curated selection of movies available for streaming on TVs/laptops/iPads etc.</p>
-<p>One of the company’s core technologies is its movie recommendation system. Your team lead, a research scientist with a PhD in recommendation systems, needs your help to do some exploratory research and analysis. Your team lead has suggested you start by looking at movie ratings data from <a href="http://movielens.org">MovieLens</a> in order to familiarize yourself with this type of data and to conduct some basic research. <em>MovieLens</em> is a publicly available dataset for research use. Attached to this assignment you’ll find a <em>small</em> version of the dataset from http://grouplens.org/datasets that contains around 100 000 ratings for ca 10 000 movies.</p>
-<p>This assignment is structured as a gradual walkthrough of the kind of analysis you could perform on this type of data set, we’ll guide you through step-by-step but with you doing the actual work.</p>
-<p>Please make sure you read the hints throughout the assignment to help guide you on the tasks.</p>
-<p>The points allocated for each of the elements in the assignment are marked in the questions and in certain cases, code scaffolding has been provided. However, if you feel this scaffolding is unhelpful, you are not obliged to use it.</p>
-</section>
-<section id="general-coding-debugging-hints" class="level2">
-<h2 class="anchored" data-anchor-id="general-coding-debugging-hints">General coding / debugging hints</h2>
-<ul>
-<li><p>If you experience errors when rendering, it is often good to step through the document one chunk at a time, starting at the very beginning.</p></li>
-<li><p>Save and re-render often. Writing a lot of code before executing anything will often lead to headaches (e.g., write one simple command as part of your answer, re-run everything, rinse-and-repeat.)</p></li>
-</ul>
-</section>
-<section id="marking-grades" class="level2">
-<h2 class="anchored" data-anchor-id="marking-grades">Marking + Grades</h2>
-<p>This assignment will be worth <strong>15%</strong> of your total grade.</p>
-<p>For this assignment, you will need to upload the following into Moodle:</p>
-<ul>
-<li><p>The rendered html file <strong>saved as a pdf</strong>. The assignment will be only marked if the pdf is uploaded in Moodle. <strong>The submitted assignment pdf file must have all the code and output visible.</strong></p></li>
-<li><p>To complete the assignment, you will need to fill in the blanks with appropriate R code for some questions. These sections are marked with <code>___</code>. For other questions, you will need to write the entire R code chunk.</p></li>
-<li><p><strong>At a minimum, your assignment should be able to be “knitted”</strong> using the <code>Knit</code> button for your Rmarkdown document so that you can produce a html file that you will save as pdf file and upload it into Moodle.</p></li>
-</ul>
-<p>If you want to look at what the assignment looks like as you progress , remember that you can set the R chunk options to <code>eval = FALSE</code> like so to ensure that you can knit the file:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>``<span class="in">`{r this-chunk-will-not-run, eval = FALSE} `</span>r''`</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a &lt;- 1 + 2</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>If you use <code>eval = FALSE</code> or <code>echo = FALSE</code>, please remember to ensure that you have set to <code>eval = TRUE</code> and <code>echo = TRUE</code> when you submit the assignment, to ensure all your R codes run.</strong></p>
-<p><strong>IMPORTANT: You must use R code to answer all the questions in the report.</strong></p>
-</section>
-<section id="due-date" class="level2">
-<h2 class="anchored" data-anchor-id="due-date">Due Date</h2>
-<p>This assignment is due on Friday, 30 May 2025, 11:55 PM. You will submit the knitted html file <strong>saved as a pdf</strong> via Moodle. Please make sure you add your name on the YAML part of the Rmd file before you knit it and save it as pdf.</p>
-</section>
-<section id="how-to-find-help-from-r-functions" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-find-help-from-r-functions">How to find help from R functions?</h2>
-<p>Remember, you can look up the help file for functions by typing: <code>?function_name</code>. For example, <code>?mean</code>.</p>
-</section>
 <section id="load-all-the-libraries-that-you-need-here" class="level2">
 <h2 class="anchored" data-anchor-id="load-all-the-libraries-that-you-need-here">Load all the libraries that you need here</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="read-in-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="read-in-the-data">Read in the data</h2>
 <p>The Movielens data consists of 2 csv files, let’s start by reading them into R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.movies <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"movies.csv"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data.ratings <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"ratings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data.movies <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"movies.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data.ratings <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"ratings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The file <code>data.movies</code> contains 3 variables with information about every movie:</p>
 <ul>
@@ -164,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>The first few rows of this dataset looks like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data.movies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data.movies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   movieId title                              genres                             
@@ -186,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this data set, the pair (<code>userId</code>, <code>movieId</code>) uniquely identifies the rating the user with a given id gave to a specific movie.</p>
 <p>The first few rows of this dataset looks like :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data.ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data.ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   userId movieId rating
@@ -203,81 +163,155 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-1" class="level2">
 <h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
 <p>How many movies are there in the <code>data.movies</code> data set? <strong>(1pt)</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data.movies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9742</code></pre>
+</div>
+</div>
 </section>
 <section id="question-2" class="level2">
 <h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
 <p>How many unique movies are there in the <code>data.ratings</code> file? <strong>(1pt)</strong>. (HINT: look at number of unique values of <code>movieId</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">n_distinct</span>(data.ratings<span class="sc">$</span>movieId)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9724</code></pre>
+</div>
+</div>
 </section>
 <section id="question-3" class="level2">
 <h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
 <p>Based on the two previous answers, we can infer that the file <code>data.ratings</code> does not record ratings for every single movie in <code>data.movies</code>. How many movies listed in <code>data.movies</code> does not have a rating recorded? <strong>(1pt)</strong></p>
+<p>There are 0 movies listed in data.movies without a rating recorded.</p>
 </section>
 <section id="question-4" class="level2">
 <h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
 <p>The variable <code>genres</code> in <code>data.movies</code> contains information on many genres. Let’s simplify things and choose the first entry in this string as the “main” genre.</p>
 <p>Use the <code>separate</code> command to create a new column in <code>data.movies</code> called <code>main.genre</code>, and print the first rows of this data frame using <code>head()</code>. Hint: you can set the <code>sep</code> argument to <code>separate</code> to <code>"\\|"</code> and the <code>extra</code> argument to <code>"drop"</code>. <strong>(1pt)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.movies =</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># data.movies %&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># separate(genres, into =..., sep = ..., extra = "drop")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.movies =</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># data.movies %&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># separate(genres, into =..., sep = ..., extra = "drop")</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>data.movies <span class="ot">=</span> data.movies <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(genres, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"main.genre"</span>), <span class="at">sep =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">|"</span>, <span class="at">extra =</span> <span class="st">"drop"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data.movies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  movieId title                              main.genre
+    &lt;dbl&gt; &lt;chr&gt;                              &lt;chr&gt;     
+1       1 Toy Story (1995)                   Adventure 
+2       2 Jumanji (1995)                     Adventure 
+3       3 Grumpier Old Men (1995)            Comedy    
+4       4 Waiting to Exhale (1995)           Comedy    
+5       5 Father of the Bride Part II (1995) Comedy    
+6       6 Heat (1995)                        Action    </code></pre>
+</div>
 </div>
 </section>
 <section id="question-5" class="level2">
 <h2 class="anchored" data-anchor-id="question-5">Question 5</h2>
 <p>What are the most 3 most common main genres in the <code>data.movies</code> dataset? <strong>(1pt)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data.movies <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(main.genre, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  main.genre     n
+  &lt;chr&gt;      &lt;int&gt;
+1 Comedy      2779
+2 Drama       2226
+3 Action      1828</code></pre>
+</div>
+</div>
 </section>
 <section id="question-6" class="level2">
 <h2 class="anchored" data-anchor-id="question-6">Question 6</h2>
 <p>In the variable <code>title</code> it seems like the year is placed at the end in parenthesis, let’s try to find what year the oldest movie was made. We can use the <code>str_extract</code> function to pick out the “(YYYY)” part of the title, then <code>str_replace_all</code> to remove the parenthesis, then convert to integers. (Note: if some titles don’t follow the “(1991)” format at the end, we’ll see <code>NA</code> values in some entries, we can ignore these here). What year was the oldest movie made? <strong>(2pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>year.parens <span class="ot">=</span> <span class="fu">str_extract</span>(data.movies<span class="sc">$</span>title, <span class="st">"</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">)"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>year <span class="ot">=</span> <span class="fu">as.integer</span>(<span class="fu">str_replace_all</span>(year.parens, <span class="st">"[()]"</span>, <span class="st">""</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ... what is the earliest year?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>year.parens <span class="ot">=</span> <span class="fu">str_extract</span>(data.movies<span class="sc">$</span>title, <span class="st">"</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">)"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>year <span class="ot">=</span> <span class="fu">as.integer</span>(<span class="fu">str_replace_all</span>(year.parens, <span class="st">"[()]"</span>, <span class="st">""</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(year, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1902</code></pre>
+</div>
 </div>
 </section>
 <section id="question-7" class="level2">
 <h2 class="anchored" data-anchor-id="question-7">Question 7</h2>
 <p>Using the answer above, what is the name and main genre of the oldest movie(s)? <strong>(2pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the row number in data.movies (replace 1908 with the year you found above)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>year.index <span class="ot">=</span> <span class="fu">which</span>(year <span class="sc">==</span> <span class="dv">1908</span>) </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, pick out this row number in the data.movies data frame...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the row number(s) for the oldest year</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>year.index <span class="ot">=</span> <span class="fu">which</span>(year <span class="sc">==</span> <span class="dv">1902</span>)  </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the corresponding rows from data.movies</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>data.movies[year.index, <span class="fu">c</span>(<span class="st">"title"</span>, <span class="st">"main.genre"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  title                                                main.genre
+  &lt;chr&gt;                                                &lt;chr&gt;     
+1 Trip to the Moon, A (Voyage dans la lune, Le) (1902) Action    </code></pre>
+</div>
 </div>
 </section>
 <section id="question-8" class="level2">
 <h2 class="anchored" data-anchor-id="question-8">Question 8</h2>
 <p>Your team lead is interested in average ratings. Before proceeding, she recommends that you restrict your data set to movies that have been rated by at least 25 users. Filter the <code>data.ratings</code> data frame to contain only movies that have been rated by at least (&gt;=) 25 users. <strong>(2pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is some suggested code:</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings = data.ratings %&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group_by(?) %&gt;%</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mutate(num.ratings = ?) %&gt;%</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(num.ratings &gt;= 25)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data.ratings <span class="ot">=</span> data.ratings <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(movieId) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">num.ratings =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(num.ratings <span class="sc">&gt;=</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="question-9" class="level2">
 <h2 class="anchored" data-anchor-id="question-9">Question 9</h2>
 <p>How many unique movies are left in the ratings data set now? <strong>(1pt)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">n_distinct</span>(data.ratings<span class="sc">$</span>movieId)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1050</code></pre>
+</div>
+</div>
+<p>The distinct movies have reduced to 1050 from 9724 after filtering for movies with atleast 25 ratings.</p>
 </section>
 <section id="question-10" class="level2">
 <h2 class="anchored" data-anchor-id="question-10">Question 10</h2>
 <p>Create a new data frame called <code>ratings</code> that have columns: <code>movieId</code>: the id of the movie, <code>avg.rating</code>: the average <code>rating</code>, <code>sd.rating</code>: the standard deviation of <code>rating</code>. Print the first 6 rows of this data. <strong>(2pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ratings = data.ratings %&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group_by(?) %&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># summarise(?, ?)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ratings <span class="ot">=</span> data.ratings <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(movieId) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg.rating =</span> <span class="fu">mean</span>(rating),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd.rating =</span> <span class="fu">sd</span>(rating)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  movieId avg.rating sd.rating
+    &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+1       1       3.92     0.835
+2       2       3.43     0.882
+3       3       3.26     1.05 
+4       5       3.07     0.907
+5       6       3.95     0.817
+6       7       3.19     0.978</code></pre>
+</div>
 </div>
 </section>
 <section id="question-11" class="level2">
 <h2 class="anchored" data-anchor-id="question-11">Question 11</h2>
 <p>Before looking closer at ratings, it is useful to add some information from the <code>data.movies</code> data frame. Do a left join, overwriting the <code>ratings</code> data frame, where the left hand side is <code>ratings</code>, the right and side is <code>data.movies[c("movieId", "title", "main.genre")]</code> and the merge key is <code>movieId</code>. Print the first 6 rows. <strong>(2pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ratings =</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># left_join(</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ?,</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ?,</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ?</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ratings =</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># left_join(</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ?,</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ?,</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ?</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="question-12" class="level2">
@@ -300,23 +334,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The idea is that this matrix can be used for clustering: each user (row) is described by a high-dimensional vector, their 1051-dimensional vectors of ratings. The idea is that users that are “similar” in this vector space, may also share similar movie taste.</p>
 <p>We start by transforming our data into said format, we do this using <code>pivot_wider</code>. Complete the skeleton below where we create a new data frame <code>ratings.wide</code> that follows the above format. <strong>(2pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ratings.wide = data.ratings %&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(userId, movieId, rating) %&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_wider(</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     names_from = should be a movie identifier,</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     values_from = should be a rating number,</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     values_fill = list(rating = 0)</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ratings.wide = data.ratings %&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(userId, movieId, rating) %&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_wider(</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     names_from = should be a movie identifier,</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     values_from = should be a rating number,</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     values_fill = list(rating = 0)</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="question-16" class="level2">
 <h2 class="anchored" data-anchor-id="question-16">Question 16</h2>
 <p>Your research lead suggest trying out K-means with 5 centers. Run the <code>kmeans</code> command on <code>X</code> where <code>X = as.matrix(ratings.wide[, -1])</code>. <strong>(1pt)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># </span><span class="al">NOTE</span><span class="co">: don't remove this.</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># X = ?</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># res = kmeans(X , centers = ?)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># </span><span class="al">NOTE</span><span class="co">: don't remove this.</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># X = ?</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># res = kmeans(X , centers = ?)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="question-17" class="level2">
@@ -326,24 +360,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To assess this strategy, your team lead suggest that you show her what the highest ranked movies in each cluster are.</p>
 <p>Start by adding a column called <code>cluster</code> to the <code>data.ratings</code> data set. <strong>(2pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with cluser and userId info</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cluster.data = tibble(userId = ratings.wide$userId, cluster = res$cluster)</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge this with data.ratings</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings = left_join(</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   data.ratings,</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   cluster.data,</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   by = ?</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with cluser and userId info</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cluster.data = tibble(userId = ratings.wide$userId, cluster = res$cluster)</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge this with data.ratings</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings = left_join(</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   data.ratings,</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   cluster.data,</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   by = ?</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="question-18" class="level2">
 <h2 class="anchored" data-anchor-id="question-18">Question 18</h2>
 <p>Show the name of the top-3 rated movies for each cluster 1 to 5. HINT: You should see “My Fair Lady (1964)” somewhere in cluster 3’s top, and “Intouchables (2011)” somewhere in cluster 5’s top. <strong>(6pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings %&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group_by(?, ?) %&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings %&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group_by(?, ?) %&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="question-19" class="level2">

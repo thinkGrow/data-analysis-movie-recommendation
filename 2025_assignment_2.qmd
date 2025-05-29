@@ -125,9 +125,12 @@ min(year, na.rm = TRUE)
 Using the answer above, what is the name and main genre of the oldest movie(s)? **(2pts)**
 
 ```{r}
-# Find the row number in data.movies (replace 1908 with the year you found above)
-year.index = which(year == 1908) 
-# Then, pick out this row number in the data.movies data frame...
+# Find the row number(s) for the oldest year
+year.index = which(year == 1902)  
+
+# Display the corresponding rows from data.movies
+data.movies[year.index, c("title", "main.genre")]
+
 ```
 
 
@@ -136,11 +139,10 @@ year.index = which(year == 1908)
 Your team lead is interested in average ratings. Before proceeding, she recommends that you restrict your data set to movies that have been rated by at least 25 users. Filter the `data.ratings` data frame to contain only movies that have been rated by at least (>=) 25 users. **(2pts)**
 
 ```{r}
-# Here is some suggested code:
-# data.ratings = data.ratings %>%
-  # group_by(?) %>%
-  # mutate(num.ratings = ?) %>%
-  # filter(num.ratings >= 25)
+data.ratings = data.ratings %>%
+  group_by(movieId) %>%
+  mutate(num.ratings = n()) %>%
+  filter(num.ratings >= 25)
 ```
 
 
@@ -148,15 +150,25 @@ Your team lead is interested in average ratings. Before proceeding, she recommen
 
 How many unique movies are left in the ratings data set now? **(1pt)**
 
+```{r}
+n_distinct(data.ratings$movieId)
+```
+
+The distinct movies have reduced to 1050 from 9724 after filtering for movies with atleast 25 ratings.
 
 ## Question 10
 
 Create a new data frame called `ratings` that have columns: `movieId`: the id of the movie, `avg.rating`: the average `rating`, `sd.rating`: the standard deviation of `rating`. Print the first 6 rows of this data. **(2pts)**
 
 ```{r}
-# ratings = data.ratings %>%
-  # group_by(?) %>%
-  # summarise(?, ?)
+ratings = data.ratings %>%
+  group_by(movieId) %>%
+  summarise(
+    avg.rating = mean(rating),
+    sd.rating = sd(rating)
+  )
+
+head(ratings)
 ```
 
 
