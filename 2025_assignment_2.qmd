@@ -1,6 +1,6 @@
 ---
 title: 'ETC1010-5510: Introduction to Data Analysis Assignment 2'
-author: "Your name"
+author: "MT"
 output: html
 ---
 
@@ -17,70 +17,11 @@ knitr::opts_chunk$set(
 set.seed(6)
 ```
 
-
-
-## Instructions to Students
-
-**This is an individual assignment and you must work on it on your own. Collaboration on the assignment constitute collusion. For more on collusion and misconduct please see this [webpage.](https://connect.monash.edu/s/article/FAQ-2144) ** 
-
-You have just joined a **movie streaming startup** as a data scientist. The company plans to offer a curated selection of movies available for streaming on TVs/laptops/iPads etc.
-
-One of the company's core technologies is its movie recommendation system. Your team lead, a research scientist with a PhD in recommendation systems, needs your help to do some exploratory research and analysis. Your team lead has suggested you start by looking at movie ratings data from [MovieLens](http://movielens.org) in order to familiarize yourself with this type of data and to conduct some basic research. *MovieLens* is a publicly available dataset for research use. Attached to this assignment you'll find a *small* version of the dataset from http://grouplens.org/datasets that contains around 100 000 ratings for ca 10 000 movies.
-
-This assignment is structured as a gradual walkthrough of the kind of analysis you could perform on this type of data set, we'll guide you through step-by-step but with you doing the actual work.
-
-Please make sure you read the hints throughout the assignment to help guide you on the tasks.
-
-The points allocated for each of the elements in the assignment are marked in the questions and in certain cases, code scaffolding has been provided. However, if you feel this scaffolding is unhelpful, you are not obliged to use it. 
-
-## General coding / debugging hints
-
-* If you experience errors when rendering, it is often good to step through the document one chunk at a time, starting at the very beginning.
-
-* Save and re-render often. Writing a lot of code before executing anything will often lead to headaches (e.g., write one simple command as part of your answer, re-run everything, rinse-and-repeat.)
-
-
-## Marking + Grades
-
-This assignment will be worth **15%** of your total grade.
-
-For this assignment, you will need to upload the following into Moodle:
-
- - The rendered html file **saved as a pdf**. The assignment will be only marked if the pdf is uploaded in Moodle. **The submitted assignment pdf file must have all the code and output visible.**
-      
--  To complete the assignment, you will need to fill in the blanks with appropriate R code for some questions. These sections are marked with  `___`. For other questions, you will need to write the entire R code chunk. 
-
-- **At a minimum, your assignment should be able to be "knitted"** using the `Knit` button for your Rmarkdown document so that you can produce a html file that you will save as pdf file and upload it into Moodle. 
-
-If you want to look at what the assignment looks like as you progress , remember that you can set the R chunk options to `eval = FALSE` like so to ensure that you can knit the file:
-
-````markdown
-```{r this-chunk-will-not-run, eval = FALSE} `r''`
-a <- 1 + 2
-```
-````
-
-**If you use `eval = FALSE` or `echo = FALSE`, please remember to ensure that you have set  to `eval = TRUE` and `echo = TRUE` when you submit the assignment, to ensure all your R codes run.**
-
-**IMPORTANT: You must use R code to answer all the questions in the report.**
-
-## Due Date
-
-This assignment is due on Friday, 30 May 2025, 11:55 PM. You will submit the knitted html file **saved as a pdf**  via Moodle. Please make sure you add your name on the YAML part of the Rmd file before you knit it and save it as pdf.
-
-## How to find help from R functions?
-
-Remember, you can look up the help file for functions by typing: `?function_name`. For example, `?mean`. 
-
-
-
 ## Load all the libraries that you need here
 
 ```{r libraries, eval = TRUE, message = FALSE, warning = FALSE}
 library(tidyverse)
 ```
-
-
 
 ## Read in the data
 
@@ -119,14 +60,25 @@ head(data.ratings)
 ## Question 1  
 How many movies are there in the `data.movies` data set? **(1pt)**.
 
+```{r}
+nrow(data.movies)
+```
+
+
 
 ## Question 2
 How many unique movies are there in the `data.ratings` file? **(1pt)**. (HINT: look at number of unique values of `movieId`).
+
+```{r}
+n_distinct(data.ratings$movieId)
+```
+
 
 
 ## Question 3
 Based on the two previous answers, we can infer that the file `data.ratings` does not record ratings for every single movie in `data.movies`. How many movies listed in `data.movies` does not have a rating recorded? **(1pt)**
 
+There are 0 movies listed in data.movies without a rating recorded.
 
 
 ## Question 4
@@ -138,11 +90,23 @@ Use the `separate` command to create a new column in `data.movies` called `main.
 # data.movies =
   # data.movies %>%
   # separate(genres, into =..., sep = ..., extra = "drop")
+data.movies = data.movies %>%
+  separate(genres, into = c("main.genre"), sep = "\\|", extra = "drop")
+
+head(data.movies)
+
 ```
 
 
 ## Question 5
 What are the most 3 most common main genres in the `data.movies` dataset? **(1pt)**
+
+```{r}
+data.movies %>%
+  count(main.genre, sort = TRUE) %>%
+  slice_head(n = 3)
+```
+
 
 
 
@@ -152,7 +116,7 @@ In the variable `title` it seems like the year is placed at the end in parenthes
 ```{r}
 year.parens = str_extract(data.movies$title, "\\(\\d{4}\\)")
 year = as.integer(str_replace_all(year.parens, "[()]", ""))
-# ... what is the earliest year?
+min(year, na.rm = TRUE)
 ```
 
 
