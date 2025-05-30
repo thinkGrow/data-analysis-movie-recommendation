@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="MT">
+<meta name="author" content="Maisha Tahsin">
 
 <title>ETC1010-5510: Introduction to Data Analysis Assignment 2</title>
 <style>
@@ -90,7 +90,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>MT </p>
+             <p>Maisha Tahsin </p>
           </div>
   </div>
     
@@ -329,18 +329,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-12" class="level2">
 <h2 class="anchored" data-anchor-id="question-12">Question 12</h2>
 <p>What are the names of the highest and lowest rated movie? <strong>(1pt)</strong></p>
-<p><strong>Highest rated movie:</strong> Shawshank Redemption, The (1994)<br>
-<strong>Lowest rated movie:</strong> Anaconda (1997)</p>
-<p>Highest rated movie :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Highest rated movie</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>highest <span class="ot">=</span> ratings <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg.rating)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Highest rated movie: </span><span class="sc">\n\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Highest rated movie: </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lowest rated movie</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>lowest <span class="ot">=</span> ratings <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(avg.rating) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Lowest rated movie:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lowest rated movie:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lowest <span class="sc">%&gt;%</span> <span class="fu">select</span>(title, avg.rating))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  title           avg.rating
+  &lt;chr&gt;                &lt;dbl&gt;
+1 Anaconda (1997)       1.93</code></pre>
+</div>
+</div>
 </section>
 <section id="question-13" class="level2">
 <h2 class="anchored" data-anchor-id="question-13">Question 13</h2>
 <p>The variable <code>sd.rating</code> can be seen as a measure of how dispersed the viewer’s opinion of a movie is. Which movie has the least dispersion in ratings? Hint: if you did the steps correctly, you should find a movie where the plot centers around the famous “Watergate scandal”. <strong>(1pt)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ratings <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sd.rating) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, sd.rating)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  title                          sd.rating
+  &lt;chr&gt;                              &lt;dbl&gt;
+1 All the President's Men (1976)     0.449</code></pre>
+</div>
+</div>
 </section>
 <section id="question-14" class="level2">
 <h2 class="anchored" data-anchor-id="question-14">Question 14</h2>
 <p>“Totoro”, “Princess Mononoke”, and “Spirited Away” are famous movies by the Japanese animator Hayao Miyazaki. What is the average rating for these 3 movies? <strong>(2pts)</strong></p>
 <p>Hint: the function <code>grep(pattern, x)</code> returns indicies in the vector <code>x</code> that matches the strings in <code>pattern</code>. With the pattern <code>"Totoro|Mononoke|Spirited"</code> and <code>x</code> <code>"ratings$title"</code> you could search for the indices for these 3 movies.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find indices of the 3 movies</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>miyazaki_index <span class="ot">=</span> <span class="fu">grep</span>(<span class="st">"Totoro|Mononoke|Spirited"</span>, ratings<span class="sc">$</span>title)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check which titles matched</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>ratings<span class="sc">$</span>title[miyazaki_index]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Princess Mononoke (Mononoke-hime) (1997)"            
+[2] "Spirited Away (Sen to Chihiro no kamikakushi) (2001)"
+[3] "My Neighbor Totoro (Tonari no Totoro) (1988)"        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate their average rating</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ratings<span class="sc">$</span>avg.rating[miyazaki_index])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.024322</code></pre>
+</div>
+</div>
 </section>
 <section id="question-15" class="level2">
 <h2 class="anchored" data-anchor-id="question-15">Question 15</h2>
@@ -349,23 +402,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The idea is that this matrix can be used for clustering: each user (row) is described by a high-dimensional vector, their 1051-dimensional vectors of ratings. The idea is that users that are “similar” in this vector space, may also share similar movie taste.</p>
 <p>We start by transforming our data into said format, we do this using <code>pivot_wider</code>. Complete the skeleton below where we create a new data frame <code>ratings.wide</code> that follows the above format. <strong>(2pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ratings.wide = data.ratings %&gt;%</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(userId, movieId, rating) %&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_wider(</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     names_from = should be a movie identifier,</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     values_from = should be a rating number,</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     values_fill = list(rating = 0)</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1050    5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ratings.wide <span class="ot">=</span> data.ratings <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(userId, movieId, rating) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> movieId,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> rating,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_fill =</span> <span class="fu">list</span>(<span class="at">rating =</span> <span class="dv">0</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(ratings.wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  610 1051</code></pre>
+</div>
 </div>
 </section>
 <section id="question-16" class="level2">
 <h2 class="anchored" data-anchor-id="question-16">Question 16</h2>
 <p>Your research lead suggest trying out K-means with 5 centers. Run the <code>kmeans</code> command on <code>X</code> where <code>X = as.matrix(ratings.wide[, -1])</code>. <strong>(1pt)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># </span><span class="al">NOTE</span><span class="co">: don't remove this.</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># X = ?</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># res = kmeans(X , centers = ?)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># </span><span class="al">NOTE</span><span class="co">: don't remove this.</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> <span class="fu">as.matrix</span>(ratings.wide[, <span class="sc">-</span><span class="dv">1</span>])  <span class="co"># remove userId column</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">kmeans</span>(X, <span class="at">centers =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="question-17" class="level2">
@@ -375,24 +438,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To assess this strategy, your team lead suggest that you show her what the highest ranked movies in each cluster are.</p>
 <p>Start by adding a column called <code>cluster</code> to the <code>data.ratings</code> data set. <strong>(2pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with cluser and userId info</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cluster.data = tibble(userId = ratings.wide$userId, cluster = res$cluster)</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge this with data.ratings</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings = left_join(</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   data.ratings,</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   cluster.data,</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   by = ?</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapping userId to cluster number</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>cluster.data <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">userId =</span> ratings.wide<span class="sc">$</span>userId, <span class="at">cluster =</span> res<span class="sc">$</span>cluster)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge with ratings based on userId</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>data.ratings <span class="ot">=</span> <span class="fu">left_join</span>(</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  data.ratings,</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  cluster.data,</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"userId"</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="question-18" class="level2">
 <h2 class="anchored" data-anchor-id="question-18">Question 18</h2>
 <p>Show the name of the top-3 rated movies for each cluster 1 to 5. HINT: You should see “My Fair Lady (1964)” somewhere in cluster 3’s top, and “Intouchables (2011)” somewhere in cluster 5’s top. <strong>(6pts)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.ratings %&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group_by(?, ?) %&gt;%</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>top_movies_by_cluster <span class="ot">=</span> data.ratings <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cluster, movieId) <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg.rating =</span> <span class="fu">mean</span>(rating), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(data.movies[, <span class="fu">c</span>(<span class="st">"movieId"</span>, <span class="st">"title"</span>)], <span class="at">by =</span> <span class="st">"movieId"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(cluster, <span class="fu">desc</span>(avg.rating)) <span class="sc">%&gt;%</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>top_movies_by_cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 4
+# Groups:   cluster [5]
+   cluster movieId avg.rating title                                             
+     &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                                             
+ 1       1    4701       5    Rush Hour 2 (2001)                                
+ 2       1    4816       5    Zoolander (2001)                                  
+ 3       1    5956       5    Gangs of New York (2002)                          
+ 4       2     413       5    Airheads (1994)                                   
+ 5       2    1228       4.64 Raging Bull (1980)                                
+ 6       2    1235       4.64 Harold and Maude (1971)                           
+ 7       3     720       5    Wallace &amp; Gromit: The Best of Aardman Animation (…
+ 8       3     914       5    My Fair Lady (1964)                               
+ 9       3    1060       5    Swingers (1996)                                   
+10       4       3       5    Grumpier Old Men (1995)                           
+11       4    2150       5    Gods Must Be Crazy, The (1980)                    
+12       4    2160       5    Rosemary's Baby (1968)                            
+13       5   92259       4.75 Intouchables (2011)                               
+14       5     296       4.58 Pulp Fiction (1994)                               
+15       5   79132       4.53 Inception (2010)                                  </code></pre>
+</div>
 </div>
 </section>
 <section id="question-19" class="level2">
@@ -405,6 +495,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Find out which movies this user have already watched</p></li>
 <li><p>Recommend the 5 highest rated movies in the cluster the user belongs to that the user have not already watched</p></li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Get the cluster number</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>user_cluster <span class="ot">=</span> data.ratings <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(userId <span class="sc">==</span> <span class="dv">414</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(user_cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Find movies the user has already rated</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>watched_movies <span class="ot">=</span> data.ratings <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(userId <span class="sc">==</span> <span class="dv">414</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(movieId)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Average ratings of movies in that cluster</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>cluster_avg <span class="ot">=</span> data.ratings <span class="sc">%&gt;%</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cluster <span class="sc">==</span> user_cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(movieId) <span class="sc">%&gt;%</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg.rating =</span> <span class="fu">mean</span>(rating), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Recommend top 5 unseen movies</span></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>recommendations <span class="ot">=</span> cluster_avg <span class="sc">%&gt;%</span></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>movieId <span class="sc">%in%</span> watched_movies) <span class="sc">%&gt;%</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(data.movies[, <span class="fu">c</span>(<span class="st">"movieId"</span>, <span class="st">"title"</span>)], <span class="at">by =</span> <span class="st">"movieId"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg.rating)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>recommendations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  movieId avg.rating title                         
+    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                         
+1   92259       4.75 Intouchables (2011)           
+2     914       4.43 My Fair Lady (1964)           
+3     898       4.3  Philadelphia Story, The (1940)
+4    1244       4.29 Manhattan (1979)              
+5    1203       4.27 12 Angry Men (1957)           </code></pre>
+</div>
+</div>
 </section>
 
 </main>

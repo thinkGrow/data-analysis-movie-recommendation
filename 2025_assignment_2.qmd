@@ -1,6 +1,6 @@
 ---
 title: 'ETC1010-5510: Introduction to Data Analysis Assignment 2'
-author: "MT"
+author: "Maisha Tahsin"
 output: html
 ---
 
@@ -295,10 +295,10 @@ To assess this strategy, your team lead suggest that you show her what the highe
 Start by adding a column called `cluster` to the `data.ratings` data set. **(2pts)**
 
 ```{r}
-# Create a data frame mapping userId to cluster number
+# Mapping userId to cluster number
 cluster.data = tibble(userId = ratings.wide$userId, cluster = res$cluster)
 
-# Merge this with data.ratings based on userId
+# Merge with ratings based on userId
 data.ratings = left_join(
   data.ratings,
   cluster.data,
@@ -340,13 +340,12 @@ HINT: To answer this, you need to:
 
 
 ```{r}
-# Step 1: Get the cluster number (make sure it's a single value!)
+# Step 1: Get the cluster number
 user_cluster = data.ratings %>%
   filter(userId == 414) %>%
   pull(cluster) %>%
   unique()
 
-# Optional: check it's length 1
 length(user_cluster)
 
 # Step 2: Find movies the user has already rated
@@ -354,7 +353,7 @@ watched_movies = data.ratings %>%
   filter(userId == 414) %>%
   pull(movieId)
 
-# Step 3: Average ratings of movies in that user's cluster
+# Step 3: Average ratings of movies in that cluster
 cluster_avg = data.ratings %>%
   filter(cluster == user_cluster) %>%
   group_by(movieId) %>%
